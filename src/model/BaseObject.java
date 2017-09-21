@@ -15,17 +15,13 @@ package model;
  * 11Package包信息
  * Created by kale on 2017/9/21.
  */
-public class BaseObject {
+public class BaseObject extends Reply{
     //elementtype
     private String elementType;
     //接口中唯一标识
     private String id;
     //操作类型
     private String action;
-    //0: 成功其他: 错误代码
-    private String result;
-    //错误描述
-    private String errorDescription;
 
     public BaseObject(String elementType, String id, String action) {
         this.elementType = elementType;
@@ -57,19 +53,4 @@ public class BaseObject {
         this.action = action;
     }
 
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
-
-    public String getErrorDescription() {
-        return errorDescription;
-    }
-
-    public void setErrorDescription(String errorDescription) {
-        this.errorDescription = errorDescription;
-    }
 }
