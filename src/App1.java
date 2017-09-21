@@ -26,6 +26,8 @@ public class App1 extends JFrame implements ActionListener {
     private JPanel jPanel;
     private JLabel jLabel1;
     private JLabel jLabel2;
+    private JLabel jLabel3;
+
     private JButton jButton1;
     private JButton jButton2;
 
@@ -41,18 +43,22 @@ public class App1 extends JFrame implements ActionListener {
         jPanel.setSize(400, 400);
         jPanel.setLayout(new BorderLayout(5, 5));
         jPanel.setBackground(Color.white);
-        jPanel.setLayout(new FlowLayout(1, 5, 5));
+        jPanel.setLayout(new GridLayout(4, 2));
         //panel.setLocation(0, 100);
         jLabel1 = new JLabel("Excel转换XML小工具");
         jLabel1.setSize(100, 20);
         jLabel2 = new JLabel("...");
         jLabel2.setSize(100, 20);
+        jLabel3 = new JLabel("message");
+        jLabel3.setSize(100, 20);
         jButton1 = new JButton("请选择文件");
+        jButton1.setSize(100,20);
         jButton1.addActionListener(this);
         jButton2 = new JButton("转换");
         jButton2.addActionListener(this);
         jPanel.add(jLabel2);
         jPanel.add(jButton1);
+        jPanel.add(jLabel3);
         this.add(jLabel1, BorderLayout.NORTH);
         this.add(jButton2, BorderLayout.SOUTH);
         this.add(jPanel, BorderLayout.CENTER);
@@ -171,10 +177,10 @@ public class App1 extends JFrame implements ActionListener {
                 XMLWriter xmlWriter = new XMLWriter(fileWriter, format);
                 xmlWriter.write(document);
                 xmlWriter.close();
-                jLabel2.setText("转换成功");
+                jLabel3.setText("转换成功");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
-                jLabel2.setText("error");
+                jLabel3.setText("error");
             }
         }
 
@@ -238,17 +244,14 @@ public class App1 extends JFrame implements ActionListener {
             for (int i = 1; i < rowNum; i++) {
                 Row row = sheet.getRow(i);
                 String fileName1 = row.getCell(0) != null ? row.getCell(0).getStringCellValue() : "";
-                if (i == 40) {
-                    System.out.println("ddd");
-                }
                 if (!fileName1.equals("")) {
-                    baseObjectList.add(new Program("2001", "2001", "REGIST", fileName1, "Series", "1"));
-//                    list.add(new Policy(row.getCell(10).getStringCellValue(), row.getCell(11).getStringCellValue()));
+                    Program item = new Program("2001", "2001", "REGIST", fileName1, "Series", "1");
+
+                    baseObjectList.add(item);
                 }
             }
             result.setBaseObjectList(baseObjectList);
             result.setMappingList(mappings);
-            System.out.println("dddd");
             return result;
         } catch (IOException ex) {
             ex.printStackTrace();
